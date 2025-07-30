@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat, Lato } from "next/font/google";
 import "./globals.css";
+import ConditionalLayout from "@/components/layout/ConditionalLayout";
 
 const montserrat = Montserrat({
   weight: ['500', '600', '700'],
@@ -29,7 +30,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${lato.variable} ${montserrat.variable} ${lato.className} antialiased`}>
-        {children}
+        <ConditionalLayout>
+          {children}
+        </ConditionalLayout>
       </body>
     </html>
   );
