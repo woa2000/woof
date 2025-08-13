@@ -17,7 +17,7 @@ const StatCard: React.FC<StatCardProps> = ({
   change,
   changeType = 'neutral',
   icon,
-  gradient = 'from-woof-orange to-warm-yellow',
+  gradient = 'from-woof-blue to-blue-300',
   className = '',
 }) => {
   const changeColors = {
@@ -37,7 +37,7 @@ const StatCard: React.FC<StatCardProps> = ({
         <div className="flex items-center justify-between">
           <div className="flex-1">
             <p className="text-sm font-medium text-gray-600 mb-1">{title}</p>
-            <p className="text-3xl font-bold text-dark-brown">{value}</p>
+            <p className="text-3xl font-bold text-woof-dark-gray">{value}</p>
             {change && (
               <div className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mt-2 ${changeColors[changeType]}`}>
                 {changeType === 'increase' && (

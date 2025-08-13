@@ -183,7 +183,7 @@ const DashboardV2Page: React.FC = () => {
               </div>
             </div>
             
-            <h1 className="text-4xl lg:text-5xl font-display font-bold text-dark-brown mb-2">
+            <h1 className="text-4xl lg:text-5xl font-display font-bold text-woof-dark-gray mb-2">
               {dashboardContext.businessHours ? '☀️' : '🌙'} Olá, {user?.name || user?.email?.split('@')[0] || 'Dr(a)'}!
             </h1>
             <p className="text-lg text-gray-600">
@@ -306,7 +306,7 @@ const DashboardV2Page: React.FC = () => {
                 <button
                   key={shortcut.name}
                   onClick={() => router.push(shortcut.href)}
-                  className="p-4 bg-gray-50 rounded-lg hover:bg-woof-orange hover:text-white transition-all duration-200 text-center"
+                  className="p-4 bg-gray-50 rounded-lg hover:bg-woof-blue hover:text-white transition-all duration-200 text-center"
                 >
                   <div className="text-2xl mb-2">{shortcut.icon}</div>
                   <div className="text-sm font-medium">{shortcut.name}</div>

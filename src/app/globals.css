@@ -43,6 +43,20 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* Tailwind v4 token definitions for Woof brand colors */
+/* Marca principal (tokens adicionados dentro do inline theme para Tailwind v4) */
+@theme inline {
+  --color-woof-blue: #a4c2dc;        /* Azul claro principal */
+  --color-woof-dark-gray: #5a6872;   /* Cinza escuro principal */
+  --color-woof-white: #ffffff;       /* Branco */
+  --color-woof-orange: #FF6B00;      /* Legado */
+  --color-warm-yellow: #FFC25C;      /* Legado */
+  --color-teal-accent: #009688;      /* Legado */
+  --color-dark-brown: #4A2E00;       /* Legado */
+  --color-dark-gray: #333333;        /* Legado */
+  --color-light-gray: #F4F4F4;       /* Legado */
+}
+
 /* Custom animations for dashboard */
 @keyframes fadeInUp {
   from {
@@ -196,4 +210,16 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Fallback utilities para cores de marca caso tokens não gerem classes */
+@layer utilities {
+  .bg-woof-blue { background-color: #a4c2dc; }
+  .text-woof-blue { color: #a4c2dc; }
+  .border-woof-blue { border-color: #a4c2dc; }
+  .bg-woof-dark-gray { background-color: #5a6872; }
+  .text-woof-dark-gray { color: #5a6872; }
+  .border-woof-dark-gray { border-color: #5a6872; }
+  .text-woof-white { color: #ffffff; }
+  .bg-woof-white { background-color: #ffffff; }
 }

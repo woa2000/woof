@@ -5,9 +5,9 @@ interface DashboardLayoutProps {
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
-    <main className="flex-1 p-6">
+    <section className="min-h-full">
       {children}
-    </main>
+    </section>
   );
 };
 

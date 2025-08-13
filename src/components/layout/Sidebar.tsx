@@ -1,4 +1,4 @@
-// src/components/layout/Sidebar.tsx
+// Sidebar limpo com altura máxima 100vh e conteúdo rolável.
 'use client';
 
 import Link from 'next/link';
@@ -7,137 +7,120 @@ import { useEffect, useState } from 'react';
 import { LayoutDashboard, Users, Target, FileText, Settings, LogOut, User, BookOpen } from 'lucide-react';
 import Logo from '@/components/ui/Logo';
 import { useAuth } from '@/hooks/features/useAuth';
-import Button from '@/components/ui/Button';
 
-const sidebarItems = [
+const items = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Anamnese Digital', href: '/anamnese-digital', icon: FileText },
   { name: 'Manual da Marca', href: '/manual-marca', icon: BookOpen },
   { name: 'Leads', href: '/leads', icon: Users },
   { name: 'Campanhas', href: '/campanhas', icon: Target },
-  { name: 'Landing Pages', href: '/landing-pages', icon: FileText },  
-  { name: 'Configurações', href: '/configuracoes', icon: Settings },
+  { name: 'Landing Pages', href: '/landing-pages', icon: FileText },
+  { name: 'Configurações', href: '/configuracoes', icon: Settings }
 ];
 
 const Sidebar: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { user, signOut } = useAuth();
-  const [isClient, setIsClient] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
 
-  // Garante que só renderize após a hidratação
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Debug
-  console.log('🎯 Sidebar sendo renderizado!');
+  useEffect(() => setHydrated(true), []);
 
   const handleLogout = async () => {
     const result = await signOut();
-    if (result.success) {
-      router.push('/login');
-    }
+    if (result.success) router.push('/login');
   };
 
-  // Durante a hidratação, mostra um placeholder simples
-  if (!isClient) {
+  const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <aside
+      className="w-64 h-screen max-h-screen bg-woof-dark-gray text-woof-white p-6 flex flex-col overflow-hidden"
+      style={{ backgroundColor: '#5a6872', width: '256px' }}
+    >
+      {children}
+    </aside>
+  );
+
+  if (!hydrated) {
     return (
-      <aside 
-        className="w-64 bg-dark-brown text-white p-6 flex flex-col" 
-        style={{ 
-          backgroundColor: '#4A2E00', 
-          minHeight: '100vh',
-          width: '256px'
-        }}
-      >
-        <div className="mb-8">
-          <div className="text-white font-display font-semibold text-2xl uppercase">
-            Woof®
-          </div>
+      <Shell>
+        <div className="mb-8 flex items-center justify-center">
+          <div className="h-12 w-40 rounded bg-white/10 animate-pulse" />
         </div>
-        <nav className="flex-grow">
-          <div className="animate-pulse">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="mb-4 h-10 bg-white bg-opacity-10 rounded"></div>
-            ))}
-          </div>
+        <nav className="flex-grow space-y-3 overflow-y-auto pr-1">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="h-10 rounded bg-white/10 animate-pulse" />
+          ))}
         </nav>
-      </aside>
+        <div className="pt-6 border-t border-white/20 space-y-4">
+          <div className="h-10 w-full rounded bg-white/10 animate-pulse" />
+          <div className="h-10 w-full rounded bg-white/10 animate-pulse" />
+        </div>
+      </Shell>
     );
   }
 
   return (
-    <aside 
-      className="w-64 bg-dark-brown text-white p-6 flex flex-col" 
-      style={{ 
-        backgroundColor: '#4A2E00', 
-        minHeight: '100vh',
-        width: '256px'
-      }}
-    >
-      <div className="mb-8">
-        <div className="text-white font-display font-semibold text-2xl uppercase">
-          Woof®
-        </div>
+    <Shell>
+      <div className="mb-8 flex items-center justify-center">
+        <Logo sizeClass="h-12" />
       </div>
-      <nav className="flex-grow">
+      <nav className="flex-grow overflow-y-auto pr-1">
         <ul>
-          {sidebarItems.map((item) => {
-            const isActive = pathname === item.href;
+          {items.map((item) => {
+            const active = pathname === item.href;
             return (
-              <li key={item.name} className="mb-4">
+              <li key={item.name} className="mb-2">
                 <Link
                   href={item.href}
-                  className={`flex items-center py-2 px-4 rounded transition-colors duration-200
-                    ${isActive 
-                      ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg' 
-                      : 'hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white hover:shadow-md text-white text-opacity-80 hover:text-opacity-100'
-                    }
-                  `}
+                  className={`flex items-center gap-3 py-2 px-4 rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-woof-blue focus:ring-offset-woof-dark-gray ${
+                    active
+                      ? 'bg-woof-blue/90 text-woof-dark-gray font-medium shadow'
+                      : 'hover:bg-woof-blue/20'
+                  }`}
+                  style={active ? { backgroundColor: '#a4c2dc', color: '#5a6872' } : undefined}
                 >
-                  <item.icon size={20} className="mr-3" />
-                  {item.name}
+                  <item.icon size={20} />
+                  <span>{item.name}</span>
                 </Link>
               </li>
             );
           })}
         </ul>
       </nav>
-      {/* User Info at the bottom */}
-      <div className="mt-auto pt-6 border-t border-white border-opacity-20 space-y-4">
-        {/* User Profile */}
+      <div className="mt-auto pt-6 space-y-4 border-t border-white/20">
         <div className="flex items-center">
-          <div 
+          <div
             className="w-10 h-10 rounded-full mr-3 flex items-center justify-center"
-            style={{ backgroundColor: '#FF6B00' }}
+            style={{ backgroundColor: '#a4c2dc' }}
           >
             {user?.avatar ? (
-              <img src={user.avatar} alt={user.name || 'User Avatar'} className="w-full h-full object-cover rounded-full" />
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={user.avatar}
+                alt={user.name || 'Avatar'}
+                className="w-full h-full object-cover rounded-full"
+              />
             ) : (
-              <User size={20} className="text-white" />
+              <User size={20} style={{ color: '#5a6872' }} />
             )}
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold truncate">{user?.name || user?.email || 'Usuário'}</p>
-            <p className="text-xs text-white text-opacity-70 truncate">{user?.email || 'carregando...'}</p>
+            <p className="text-xs truncate text-white/70">{user?.email || 'carregando...'}</p>
           </div>
         </div>
-        
-        {/* Logout Button */}
         <button
-          className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg  px-4 py-2 rounded-lg flex items-center justify-center space-x-2 transition-all duration-200 hover:shadow-lg hover:text-white"
           onClick={handleLogout}
-          style={{
-            fontWeight: '500'
-          }}
+            className="w-full font-medium px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-200 hover:shadow-lg"
+          style={{ backgroundColor: '#a4c2dc', color: '#5a6872' }}
         >
           <LogOut size={16} />
           <span>Sair</span>
         </button>
       </div>
-    </aside>
+    </Shell>
   );
 };
 
 export default Sidebar;
+

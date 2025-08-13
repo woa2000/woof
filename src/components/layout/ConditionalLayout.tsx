@@ -38,10 +38,10 @@ const ConditionalLayout: React.FC<ConditionalLayoutProps> = ({ children }) => {
 
   // Para todas as outras páginas, renderiza com o sidebar
   return (
-    <div className="flex min-h-screen bg-light-gray">
+    <div className="flex h-screen max-h-screen overflow-hidden bg-light-gray">
       <Sidebar />
-      <div className="flex-1 flex flex-col">
-        <main className="flex-1">
+      <div className="flex-1 flex flex-col h-full">
+        <main className="flex-1 h-full overflow-y-auto px-6 py-6">
           {children}
         </main>
       </div>

@@ -7,6 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Nova paleta Woof Digital
+        'woof-blue': '#a4c2dc',       // O azul claro principal da marca
+        'woof-dark-gray': '#5a6872',  // O cinza escuro usado nos fundos
+        'woof-white': '#ffffff',      // Branco para textos e logos
+        
+        // Cores legadas (mantidas para compatibilidade)
         'woof-orange': '#FF6B00', // Cor primária
         'dark-brown': '#4A2E00',  // Para títulos
         'warm-yellow': '#FFC25C', // Destaque

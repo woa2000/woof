@@ -36,8 +36,8 @@ const DashboardVersionToggle: React.FC = () => {
           <button
             onClick={handleToggle}
             disabled={isAnimating}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-woof-orange focus:ring-offset-2 ${
-              isV2 ? 'bg-woof-orange' : 'bg-gray-300'
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-woof-blue focus:ring-offset-2 ${
+              isV2 ? 'bg-woof-blue' : 'bg-gray-300'
             } ${isAnimating ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
           >
             <span
@@ -49,10 +49,10 @@ const DashboardVersionToggle: React.FC = () => {
           
           {/* Version Labels */}
           <div className="flex flex-col text-xs">
-            <span className={`${!isV2 ? 'font-semibold text-woof-orange' : 'text-gray-500'}`}>
+            <span className={`${!isV2 ? 'font-semibold text-woof-blue' : 'text-gray-500'}`}>
               V1
             </span>
-            <span className={`${isV2 ? 'font-semibold text-woof-orange' : 'text-gray-500'}`}>
+            <span className={`${isV2 ? 'font-semibold text-woof-blue' : 'text-gray-500'}`}>
               V2
             </span>
           </div>
@@ -82,7 +82,7 @@ const DashboardVersionToggle: React.FC = () => {
         {/* Loading indicator */}
         {isAnimating && (
           <div className="absolute inset-0 bg-white bg-opacity-75 rounded-lg flex items-center justify-center">
-            <div className="animate-spin rounded-full h-4 w-4 border-2 border-woof-orange border-t-transparent"></div>
+            <div className="animate-spin rounded-full h-4 w-4 border-2 border-woof-blue border-t-transparent"></div>
           </div>
         )}
       </div>
