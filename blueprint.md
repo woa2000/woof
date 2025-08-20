@@ -49,8 +49,25 @@ O projeto "Woof Marketing Platform" é uma aplicação web construída com Next.
 *   **Sidebar navegacional** com menu lateral
 *   **Páginas placeholder** para Landing Pages, Anamnese Digital e Configurações
 
+### 📝 Manual da Marca Digital
+*   **Visualização de Capítulos:** Implementado um visualizador de capítulos para o manual da marca, permitindo navegação entre seções.
+*   **Edição de Capítulos:** Funcionalidade de edição para o conteúdo de cada capítulo do manual da marca.
+*   **Estrutura de Capítulos:** A estrutura inicial do manual da marca é definida por um template com capítulos pré-definidos.
+
+**Alterações Recentes:**
+
+### 🗑️ Capítulos Removidos do Manual da Marca
+Os seguintes capítulos foram removidos do template padrão do Manual da Marca para simplificar a estrutura e focar nos recursos essenciais:
+*   **06 - Component Library (UI Kit)**
+*   **08 - Motion & Micro-interações**
+*   **09 - Acessibilidade Web (WCAG 2.2)**
+*   **12 - E-mail & Notificações**
+
+Esta alteração visa otimizar o escopo inicial do projeto, permitindo um desenvolvimento mais focado e rápido nas funcionalidades prioritárias.
+
 **Estrutura Atual do Projeto:**
 
+```
 ```
 src/
 ├── app/
@@ -61,6 +78,7 @@ src/
 │   │   ├── landing-pages/   # Placeholder 🔄
 │   │   ├── anamnese-digital/# Placeholder 🔄
 │   │   ├── configuracoes/   # Placeholder 🔄
+│   │   ├── manual-marca/    # Manual da Marca Digital ✅
 │   │   └── layout.tsx       # Layout com proteção ✅
 │   ├── auth/
 │   │   └── callback/        # Callback OAuth ✅
@@ -88,6 +106,7 @@ src/
 │   ├── supabase-server.ts   # Supabase para server ✅
 │   └── auth-helpers.ts      # Funções de autenticação ✅
 └── middleware.ts            # Middleware de autenticação ✅
+```
 ```
 
 **Próximas Prioridades:**

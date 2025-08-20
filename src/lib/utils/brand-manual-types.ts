@@ -90,11 +90,7 @@ export interface GridLayoutContent {
   };
 }
 
-// Capítulo 06 - Component Library
-export interface ComponentLibraryContent {
-  components: string[];
-  source_link: string;
-}
+
 
 // Capítulo 07 - Ícones & Ilustrações
 export interface IconsIllustrationsContent {
@@ -105,23 +101,9 @@ export interface IconsIllustrationsContent {
   icon_repository: string;
 }
 
-// Capítulo 08 - Motion & Micro-interações
-export interface MotionContent {
-  duration_ms: {
-    min: number;
-    max: number;
-  };
-  easing: string;
-  patterns: string[];
-}
 
-// Capítulo 09 - Acessibilidade Web
-export interface AccessibilityContent {
-  contrast_ratio_min: number;
-  touch_target_px: number;
-  focus_visible: boolean;
-  required_aria: boolean;
-}
+
+
 
 // Capítulo 10 - Tom de Voz Digital
 export interface VoiceToneContent {
@@ -149,12 +131,7 @@ export interface SocialMediaContent {
   };
 }
 
-// Capítulo 12 - E-mail & Notificações
-export interface EmailNotificationsContent {
-  max_width_px: number;
-  sections: string[];
-  dark_mode_ready: boolean;
-}
+
 
 // Capítulo 13 - Banners & Ads Digitais
 export interface BannersAdsContent {
@@ -182,13 +159,13 @@ export type ChapterContent =
   | ColorPaletteContent
   | TypographyContent
   | GridLayoutContent
-  | ComponentLibraryContent
+  
   | IconsIllustrationsContent
-  | MotionContent
-  | AccessibilityContent
+  
+  
   | VoiceToneContent
   | SocialMediaContent
-  | EmailNotificationsContent
+  
   | BannersAdsContent
   | AssetManagementContent
   | ApprovalChecklistContent;
@@ -346,18 +323,9 @@ export const EMPTY_BRAND_MANUAL_TEMPLATE: BrandManualData = {
       } as GridLayoutContent,
       completion_status: 'empty'
     },
+    
     {
       id: '06',
-      title: 'Component Library (UI Kit)',
-      objective: 'Reusar elementos e acelerar o desenvolvimento.',
-      content: {
-        components: [],
-        source_link: ''
-      } as ComponentLibraryContent,
-      completion_status: 'empty'
-    },
-    {
-      id: '07',
       title: 'Ícones & Ilustrações',
       objective: 'Alinhar estilo gráfico on-line.',
       content: {
@@ -369,31 +337,10 @@ export const EMPTY_BRAND_MANUAL_TEMPLATE: BrandManualData = {
       } as IconsIllustrationsContent,
       completion_status: 'empty'
     },
+    
+    
     {
       id: '08',
-      title: 'Motion & Micro-interações',
-      objective: 'Adicionar vida sem comprometer performance.',
-      content: {
-        duration_ms: { min: 150, max: 300 },
-        easing: 'ease-out-quad',
-        patterns: []
-      } as MotionContent,
-      completion_status: 'empty'
-    },
-    {
-      id: '09',
-      title: 'Acessibilidade Web (WCAG 2.2)',
-      objective: 'Incluir todos os usuários.',
-      content: {
-        contrast_ratio_min: 4.5,
-        touch_target_px: 48,
-        focus_visible: true,
-        required_aria: true
-      } as AccessibilityContent,
-      completion_status: 'empty'
-    },
-    {
-      id: '10',
       title: 'Tom de Voz Digital',
       objective: 'Unificar a comunicação escrita em todos os canais on-line.',
       content: {
@@ -426,19 +373,9 @@ export const EMPTY_BRAND_MANUAL_TEMPLATE: BrandManualData = {
       } as SocialMediaContent,
       completion_status: 'empty'
     },
+    
     {
-      id: '12',
-      title: 'E-mail & Notificações',
-      objective: 'Garantir clareza e entregabilidade.',
-      content: {
-        max_width_px: 600,
-        sections: ['header', 'body', 'footer'],
-        dark_mode_ready: true
-      } as EmailNotificationsContent,
-      completion_status: 'empty'
-    },
-    {
-      id: '13',
+      id: '10',
       title: 'Banners & Ads Digitais',
       objective: 'Facilitar criação de anúncios.',
       content: {
@@ -449,7 +386,7 @@ export const EMPTY_BRAND_MANUAL_TEMPLATE: BrandManualData = {
       completion_status: 'empty'
     },
     {
-      id: '14',
+      id: '11',
       title: 'Gestão de Ativos & Nomenclatura',
       objective: 'Evitar confusão de arquivos e versões.',
       content: {
@@ -460,7 +397,7 @@ export const EMPTY_BRAND_MANUAL_TEMPLATE: BrandManualData = {
       completion_status: 'empty'
     },
     {
-      id: '15',
+      id: '12',
       title: 'Checklist de Aprovação Digital',
       objective: 'Reduzir retrabalho antes da publicação.',
       content: {

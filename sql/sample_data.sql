@@ -145,27 +145,6 @@ INSERT INTO brand_manuals (
         "last_updated": "2025-07-24"
       },
       {
-        "id": "06",
-        "title": "Component Library (UI Kit)",
-        "objective": "Reusar elementos e acelerar o desenvolvimento.",
-        "content": {
-          "components": [
-            "button_primary",
-            "button_secondary",
-            "card",
-            "modal",
-            "banner",
-            "badge",
-            "form_input_text",
-            "form_select",
-            "toggle_switch"
-          ],
-          "source_link": "https://figma.com/file/XXXXX/Woof-UI-Kit"
-        },
-        "completion_status": "complete",
-        "last_updated": "2025-07-24"
-      },
-      {
         "id": "07",
         "title": "Ícones & Ilustrações",
         "objective": "Alinhar estilo gráfico on-line.",
@@ -180,32 +159,7 @@ INSERT INTO brand_manuals (
         "last_updated": "2025-07-24"
       },
       {
-        "id": "08",
-        "title": "Motion & Micro-interações",
-        "objective": "Adicionar vida sem comprometer performance.",
-        "content": {
-          "duration_ms": { "min": 150, "max": 300 },
-          "easing": "ease-out-quad",
-          "patterns": ["page_transition", "hover_zoom", "loading_skeleton"]
-        },
-        "completion_status": "complete",
-        "last_updated": "2025-07-24"
-      },
-      {
-        "id": "09",
-        "title": "Acessibilidade Web (WCAG 2.2)",
-        "objective": "Incluir todos os usuários.",
-        "content": {
-          "contrast_ratio_min": 4.5,
-          "touch_target_px": 48,
-          "focus_visible": true,
-          "required_aria": true
-        },
-        "completion_status": "complete",
-        "last_updated": "2025-07-24"
-      },
-      {
-        "id": "10",
+        "id": "06",
         "title": "Tom de Voz Digital",
         "objective": "Unificar a comunicação escrita em todos os canais on-line.",
         "content": {
@@ -222,7 +176,7 @@ INSERT INTO brand_manuals (
         "last_updated": "2025-07-24"
       },
       {
-        "id": "11",
+        "id": "07",
         "title": "Social Media Toolkit",
         "objective": "Manter visual coeso entre redes sociais.",
         "content": {
@@ -241,19 +195,7 @@ INSERT INTO brand_manuals (
         "last_updated": "2025-07-24"
       },
       {
-        "id": "12",
-        "title": "E-mail & Notificações",
-        "objective": "Garantir clareza e entregabilidade.",
-        "content": {
-          "max_width_px": 600,
-          "sections": ["header", "body", "footer"],
-          "dark_mode_ready": true
-        },
-        "completion_status": "complete",
-        "last_updated": "2025-07-24"
-      },
-      {
-        "id": "13",
+        "id": "08",
         "title": "Banners & Ads Digitais",
         "objective": "Facilitar criação de anúncios.",
         "content": {
@@ -265,7 +207,7 @@ INSERT INTO brand_manuals (
         "last_updated": "2025-07-24"
       },
       {
-        "id": "14",
+        "id": "09",
         "title": "Gestão de Ativos & Nomenclatura",
         "objective": "Evitar confusão de arquivos e versões.",
         "content": {
@@ -277,7 +219,7 @@ INSERT INTO brand_manuals (
         "last_updated": "2025-07-24"
       },
       {
-        "id": "15",
+        "id": "10",
         "title": "Checklist de Aprovação Digital",
         "objective": "Reduzir retrabalho antes da publicação.",
         "content": {
