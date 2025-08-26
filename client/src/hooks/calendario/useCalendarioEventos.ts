@@ -11,12 +11,14 @@ import {
   UseCalendarioEventosResult,
   UseCalendarioMutationsResult
 } from '@/lib/calendario/calendario-types';
+import { CalendarioApiService } from '@/services/calendario-api';
 
 // =====================================================
 // CONFIGURAÇÃO BASE
 // =====================================================
 
-const API_BASE_URL = '/api/calendario';
+// Instância do serviço
+const calendarioService = new CalendarioApiService();
 
 // Cache simples em memória
 const cache = new Map<string, { data: any; timestamp: number; ttl: number }>();
@@ -100,36 +102,11 @@ export function useCalendarioEventos(
       setIsLoading(true);
       setError(null);
       
-      const searchParams = new URLSearchParams();
-      
-      // Adicionar filtros aos params
-      if (filters.categoria_pet) searchParams.append('categoria_pet', filters.categoria_pet);
-      if (filters.mes) searchParams.append('mes', filters.mes);
-      if (filters.prioridade) searchParams.append('prioridade', filters.prioridade);
-      if (filters.tags?.length) searchParams.append('tags', filters.tags.join(','));
-      if (filters.limit) searchParams.append('limit', filters.limit.toString());
-      if (filters.offset) searchParams.append('offset', filters.offset.toString());
-      
-      const url = `${API_BASE_URL}?${searchParams.toString()}`;
-      
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        signal: abortControllerRef.current.signal,
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Erro ${response.status}: ${response.statusText}`);
-      }
-      
-      const result: ApiResponse<SazonalidadeResponse[]> = await response.json();
+      const result = await calendarioService.listarEventos(filters);
       
       // Salvar no cache
-      setCache(cacheKey, result.data, 5 * 60 * 1000);
-      setData(result.data);
+      setCache(cacheKey, result.data.data, 5 * 60 * 1000);
+      setData(result.data.data);
       
     } catch (err) {
       if (err instanceof Error && err.name !== 'AbortError') {
@@ -182,19 +159,7 @@ export function useCalendarioEvento(id: string, options: { enabled?: boolean } =
       setIsLoading(true);
       setError(null);
       
-      const response = await fetch(`${API_BASE_URL}/${id}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Erro ${response.status}: ${response.statusText}`);
-      }
-      
-      const result: ApiResponse<SazonalidadeResponse> = await response.json();
+      const result = await calendarioService.buscarEventoPorId(id);
       
       // Salvar no cache
       setCache(cacheKey, result.data, 5 * 60 * 1000);
@@ -239,19 +204,7 @@ export function useCalendarioInsights() {
       setIsLoading(true);
       setError(null);
       
-      const response = await fetch(`${API_BASE_URL}/insights`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Erro ${response.status}: ${response.statusText}`);
-      }
-      
-      const result = await response.json();
+      const result = await calendarioService.obterInsights();
       
       // Salvar no cache por mais tempo (insights mudam menos)
       setCache(cacheKey, result.data, 10 * 60 * 1000);
@@ -300,27 +253,10 @@ export function useCalendarioPresets(filters: {
       setIsLoading(true);
       setError(null);
       
-      const searchParams = new URLSearchParams();
-      
-      if (filters.categoria) searchParams.append('categoria', filters.categoria);
-      if (filters.regiao) searchParams.append('regiao', filters.regiao);
-      if (filters.mes) searchParams.append('mes', filters.mes.toString());
-      
-      const url = `${API_BASE_URL}/presets?${searchParams.toString()}`;
-      
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const result = await calendarioService.listarPresets({
+        ...filters,
+        mes: filters.mes?.toString()
       });
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Erro ${response.status}: ${response.statusText}`);
-      }
-      
-      const result = await response.json();
       
       // Cache mais longo para presets (não mudam frequentemente)
       setCache(cacheKey, result.data, 60 * 60 * 1000);
@@ -369,27 +305,11 @@ export function useCalendarioSugestoes(config: {
       setIsLoading(true);
       setError(null);
       
-      const searchParams = new URLSearchParams();
-      
-      if (config.tipo_negocio) searchParams.append('tipo_negocio', config.tipo_negocio);
-      if (config.regiao) searchParams.append('regiao', config.regiao);
-      if (config.limite) searchParams.append('limite', config.limite.toString());
-      
-      const url = `${API_BASE_URL}/sugestoes?${searchParams.toString()}`;
-      
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const result = await calendarioService.obterSugestoes({
+        tipo_negocio: config.tipo_negocio,
+        regiao: config.regiao,
+        limite: config.limite
       });
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Erro ${response.status}: ${response.statusText}`);
-      }
-      
-      const result = await response.json();
       
       // Cache médio para sugestões IA
       setCache(cacheKey, result.data, 30 * 60 * 1000);
@@ -433,20 +353,7 @@ export function useCalendarioMutations(): UseCalendarioMutationsResult {
     try {
       setIsCreating(true);
       
-      const response = await fetch(API_BASE_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Erro ${response.status}: ${response.statusText}`);
-      }
-      
-      const result: ApiResponse<SazonalidadeResponse> = await response.json();
+      const result = await calendarioService.criarEvento(data);
       
       invalidateQueries();
       toast.success('Evento criado com sucesso!', {
@@ -469,20 +376,7 @@ export function useCalendarioMutations(): UseCalendarioMutationsResult {
     try {
       setIsUpdating(true);
       
-      const response = await fetch(`${API_BASE_URL}/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Erro ${response.status}: ${response.statusText}`);
-      }
-      
-      const result: ApiResponse<SazonalidadeResponse> = await response.json();
+      const result = await calendarioService.atualizarEvento(id, data);
       
       // Atualizar cache específico do evento
       const eventoCacheKey = getCacheKey('evento', { id });
@@ -510,17 +404,7 @@ export function useCalendarioMutations(): UseCalendarioMutationsResult {
     try {
       setIsDeleting(true);
       
-      const response = await fetch(`${API_BASE_URL}/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Erro ${response.status}: ${response.statusText}`);
-      }
+      await calendarioService.removerEvento(id);
       
       // Remover do cache específico
       const eventoCacheKey = getCacheKey('evento', { id });
@@ -544,20 +428,7 @@ export function useCalendarioMutations(): UseCalendarioMutationsResult {
     try {
       setIsCreating(true);
       
-      const response = await fetch(`${API_BASE_URL}/presets`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Erro ${response.status}: ${response.statusText}`);
-      }
-      
-      const result: ApiResponse<SazonalidadeResponse> = await response.json();
+      const result = await calendarioService.adicionarPreset(data.preset_id, data.personalizacoes);
       
       invalidateQueries();
       toast.success('Evento preset adicionado!', {
