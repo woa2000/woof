@@ -6,6 +6,12 @@ import next from 'next';
 import path from 'path';
 import { createServerClient } from '@supabase/ssr';
 
+// Routes imports
+import calendarioRoutes from './routes/calendario';
+import calendarioInsightsRoutes from './routes/calendario-insights';
+import calendarioSugestoesRoutes from './routes/calendario-sugestoes';
+import calendarioPresetsRoutes from './routes/calendario-presets';
+
 const dev = process.env.NODE_ENV !== 'production';
 const port = Number(process.env.PORT ?? 3000);
 const clientDir = path.resolve(process.cwd(), '../client');
@@ -59,9 +65,16 @@ async function main() {
       env: process.env.NODE_ENV,
       timestamp: new Date().toISOString(),
       uptime: Math.floor(process.uptime()),
-      version: '1.0.0'
+      version: '1.0.0',
+      server: 'Express + Next.js'
     });
   });
+  
+  // Calendar API routes (migrated from Next.js)
+  server.use('/api/calendario', calendarioRoutes);
+  server.use('/api/calendario/insights', calendarioInsightsRoutes);
+  server.use('/api/calendario/sugestoes', calendarioSugestoesRoutes);
+  server.use('/api/calendario/presets', calendarioPresetsRoutes);
   
   // Example API endpoint
   server.get('/api/example', (req, res) => {
@@ -140,6 +153,13 @@ async function main() {
     console.log(`✅ Woof Marketing server ready at http://localhost:${port}`);
     console.log(`📱 Environment: ${process.env.NODE_ENV}`);
     console.log(`🔗 Client dir: ${clientDir}`);
+    console.log(`📡 APIs migrated successfully:
+      - GET/POST /api/calendario
+      - GET/PUT/DELETE /api/calendario/:id  
+      - GET /api/calendario/insights
+      - GET /api/calendario/sugestoes
+      - GET/POST /api/calendario/presets
+    `);
   });
 }
 
