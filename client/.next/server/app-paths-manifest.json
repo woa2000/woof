@@ -1,11 +1,18 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 {}
 =======
+=======
+>>>>>>> run/fundamentos-marketing-insights
 {
   "/login/page": "app/login/page.js",
   "/(dashboard)/dashboard/page": "app/(dashboard)/dashboard/page.js",
   "/(dashboard)/anamnese-digital/page": "app/(dashboard)/anamnese-digital/page.js",
   "/(dashboard)/manual-marca/page": "app/(dashboard)/manual-marca/page.js",
   "/(dashboard)/manual-marca/[id]/page": "app/(dashboard)/manual-marca/[id]/page.js"
+<<<<<<< HEAD
+}
+>>>>>>> run/fundamentos-marketing-insights
+=======
 }
 >>>>>>> run/fundamentos-marketing-insights

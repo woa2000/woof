@@ -1,7 +1,10 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   "pages": {}
 =======
+=======
+>>>>>>> run/fundamentos-marketing-insights
   "pages": {
     "/layout": [
       "static/chunks/webpack.js",
@@ -60,5 +63,8 @@
       "static/chunks/app/(dashboard)/leads/page.js"
     ]
   }
+<<<<<<< HEAD
+>>>>>>> run/fundamentos-marketing-insights
+=======
 >>>>>>> run/fundamentos-marketing-insights
 }

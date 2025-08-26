@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 {}
 =======
+=======
+>>>>>>> run/fundamentos-marketing-insights
 {
   "../../node_modules/@supabase/auth-js/dist/module/lib/helpers.js -> @supabase/node-fetch": {
     "id": "../../node_modules/@supabase/auth-js/dist/module/lib/helpers.js -> @supabase/node-fetch",
@@ -22,5 +25,9 @@
     "id": "hooks/features/useAnamneseDigital.ts -> @/lib/mocks/anamnese",
     "files": []
   }
+<<<<<<< HEAD
+}
+>>>>>>> run/fundamentos-marketing-insights
+=======
 }
 >>>>>>> run/fundamentos-marketing-insights
