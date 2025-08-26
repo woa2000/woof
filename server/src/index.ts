@@ -13,7 +13,7 @@ import calendarioSugestoesRoutes from './routes/calendario-sugestoes';
 import calendarioPresetsRoutes from './routes/calendario-presets';
 
 const dev = process.env.NODE_ENV !== 'production';
-const port = Number(process.env.PORT ?? 3000);
+const port = Number(process.env.PORT ?? 3002);
 const clientDir = path.resolve(process.cwd(), '../client');
 
 // Initialize Next.js app

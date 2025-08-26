@@ -1,11 +1,4 @@
 {
-	"inputs": [
-		{
-			"id": "supabase-pat",
-			"type": "secret",
-			"description": "Supabase Personal Access Token (PAT)"
-		}
-	],
 	"servers": {
 		"supabase": {
 			"type": "stdio",
@@ -13,12 +6,15 @@
 			"args": [
 				"-y",
 				"@supabase/mcp-server-supabase@latest",
-				"--read-only",
-				"--project-ref=scbwseltwscuplhnmcyu"
+				"--project-ref",
+				"${env:SUPABASE_PROJECT_REF}",
+				"--read-only"
 			],
+			"envFile": "${workspaceFolder}/.env.local",
 			"env": {
-				"SUPABASE_ACCESS_TOKEN": "${input:supabase-pat}"
-			}
+				"SUPABASE_ACCESS_TOKEN": "${env:SUPABASE_ACCESS_TOKEN}"
+			},
+			"cwd": "${workspaceFolder}"
 		},
 		"playwright": {
 			"command": "npx",
@@ -28,5 +24,4 @@
 			"type": "stdio"
 		}
 	}
-	
 }

@@ -1,24 +1,7 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/calendario/page": "app/calendario/page.js",
-  "/page": "app/page.js",
-  "/cadastro/page": "app/cadastro/page.js",
   "/login/page": "app/login/page.js",
-  "/mock-test/page": "app/mock-test/page.js",
-  "/test-logo/page": "app/test-logo/page.js",
-  "/auth/callback/page": "app/auth/callback/page.js",
-  "/test-upload/page": "app/test-upload/page.js",
-  "/demo/compliance/page": "app/demo/compliance/page.js",
-  "/(dashboard)/anamnese-digital/page": "app/(dashboard)/anamnese-digital/page.js",
-  "/(dashboard)/anamnese-digital/[id]/page": "app/(dashboard)/anamnese-digital/[id]/page.js",
-  "/(dashboard)/dashboard-v2/page": "app/(dashboard)/dashboard-v2/page.js",
-  "/(dashboard)/campanhas/page": "app/(dashboard)/campanhas/page.js",
   "/(dashboard)/dashboard/page": "app/(dashboard)/dashboard/page.js",
-  "/(dashboard)/leads/page": "app/(dashboard)/leads/page.js",
-  "/(dashboard)/landing-pages/page": "app/(dashboard)/landing-pages/page.js",
+  "/(dashboard)/anamnese-digital/page": "app/(dashboard)/anamnese-digital/page.js",
   "/(dashboard)/manual-marca/page": "app/(dashboard)/manual-marca/page.js",
-  "/(dashboard)/manual-marca/[id]/editar/page": "app/(dashboard)/manual-marca/[id]/editar/page.js",
-  "/(dashboard)/manual-marca/[id]/page": "app/(dashboard)/manual-marca/[id]/page.js",
-  "/(dashboard)/configuracoes/page": "app/(dashboard)/configuracoes/page.js"
+  "/(dashboard)/manual-marca/[id]/page": "app/(dashboard)/manual-marca/[id]/page.js"
 }
