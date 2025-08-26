@@ -1,15 +1,17 @@
-# 🏗️ Arquitetura do Sistema - Plataforma Woof Marketing
+# 🏗️ Arquitetura do Sistema - Agência Pet Operada por IA
 
-Este documento descreve a arquitetura técnica da Plataforma Woof Marketing, incluindo componentes, fluxos de dados e decisões arquiteturais.
+Este documento descreve a arquitetura técnica da **Plataforma Woof Marketing**, a primeira agência de marketing pet com **80% de automação por IA** e **20% de supervisão humana**, incluindo componentes, fluxos de dados e integração com modelos de linguagem.
 
 ## 📋 Índice
 
 1. [Visão Geral da Arquitetura](#-visão-geral-da-arquitetura)
 2. [Stack Tecnológico](#-stack-tecnológico)
-3. [Arquitetura Frontend](#-arquitetura-frontend)
-4. [Arquitetura Backend](#-arquitetura-backend)
-5. [Fluxo de Dados](#-fluxo-de-dados)
-6. [Segurança](#-segurança)
+3. [Integração com IA](#-integração-com-ia)
+4. [Arquitetura Frontend](#-arquitetura-frontend)
+5. [Arquitetura Backend](#-arquitetura-backend)
+6. [Fluxo de Dados](#-fluxo-de-dados)
+7. [Fluxos de IA](#-fluxos-de-ia)
+8. [Segurança](#-segurança)
 7. [Performance](#-performance)
 8. [Escalabilidade](#-escalabilidade)
 9. [Monitoramento](#-monitoramento)
@@ -18,9 +20,9 @@ Este documento descreve a arquitetura técnica da Plataforma Woof Marketing, inc
 
 ## 🎯 Visão Geral da Arquitetura
 
-A Plataforma Woof Marketing segue uma arquitetura moderna **JAMstack** com foco em performance, segurança e escalabilidade.
+A Plataforma Woof Marketing segue uma arquitetura moderna **JAMstack** com foco em performance, segurança e escalabilidade, **integrada com IA generativa** para automação de 80% das operações de marketing.
 
-### Arquitetura de Alto Nível
+### Arquitetura de Alto Nível com IA
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -37,11 +39,12 @@ A Plataforma Woof Marketing segue uma arquitetura moderna **JAMstack** com foco 
          ▼                        ▼                        ▼
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   External      │    │   AI Services   │    │   Third-party   │
-│   Integrations  │    │                 │    │   Services      │
-│                 │    │ • OpenAI GPT-4  │    │                 │
-│ • Google Auth   │    │ • AI Analysis   │    │ • Email Service │
-│ • Facebook Auth │    │ • Content Gen   │    │ • Analytics     │
-│ • Social APIs   │    │ • Image AI      │    │ • Monitoring    │
+│   Integrations  │    │   (80% Auto)    │    │   Services      │
+│                 │    │                 │    │                 │
+│ • Google Auth   │    │ • OpenAI GPT-4o │    │ • Meta Graph    │
+│ • Facebook Auth │    │ • Brand Voice   │    │ • Google Ads    │
+│ • Social APIs   │    │ • Content Gen   │    │ • WhatsApp BSP  │
+│ • Pet Campaigns │    │ • Pet Compliance│    │ • Email Service │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
@@ -53,6 +56,70 @@ A Plataforma Woof Marketing segue uma arquitetura moderna **JAMstack** com foco 
 4. **Database-First**: Supabase como single source of truth
 5. **Real-time Updates**: WebSocket para atualizações em tempo real
 6. **Mobile-First**: Design responsivo priorizando mobile
+
+---
+
+## 🤖 Integração com IA
+
+### Modelo 80/20 - Automação Inteligente
+
+A plataforma implementa o conceito de **80% automação por IA** e **20% supervisão humana**:
+
+```typescript
+// Fluxo de Geração de Conteúdo com IA
+export interface AIContentFlow {
+  // 80% - Automação
+  aiGeneration: {
+    brandVoiceAnalysis: 'automatic',
+    contentCreation: 'automatic', 
+    complianceCheck: 'automatic',
+    performanceOptimization: 'automatic'
+  },
+  
+  // 20% - Supervisão Humana
+  humanOversight: {
+    finalApproval: 'required',
+    brandAlignment: 'validation',
+    creativeDirection: 'guidance',
+    strategicDecisions: 'manual'
+  }
+}
+```
+
+### Stack de IA Integrada
+
+```yaml
+# Modelos de Linguagem
+OpenAI:
+  - GPT-4o: Geração de conteúdo principal
+  - GPT-4o-mini: Análises rápidas e validações
+  - Embeddings: Similaridade de conteúdo
+  
+# Processamento Especializado Pet
+Brand Voice Engine:
+  - Análise de tom de voz da marca
+  - Geração de templates pet-friendly
+  - Validação de compliance veterinário
+  
+# Integração com Plataforma
+Edge Functions:
+  - analyze-website: Anamnese digital
+  - generate-content: Criação de posts/anúncios
+  - brand-voice-analysis: Análise de identidade
+  - compliance-check: Validação veterinária
+```
+
+### Fluxo de Dados com IA
+
+```
+Brand Manual → Brand Voice JSON → AI System Prompt → Content Generation
+     │                │                    │                │
+     │                │                    │                ▼
+     │                │                    │         Human Validation
+     │                │                    │                │
+     │                ▼                    ▼                ▼
+Pet Campaign Kits → Prompt Templates → Generated Content → Published Content
+```
 
 ---
 
@@ -421,6 +488,80 @@ const updateBrandManual = useMutation({
     queryClient.invalidateQueries(['brand-manual', newData.id]);
   },
 });
+```
+
+---
+
+## 🧠 Fluxos de IA
+
+### Fluxo de Geração de Conteúdo
+
+```typescript
+// 1. Brand Voice Analysis
+const brandVoice = await analyzeBrandVoice({
+  brandManual: userBrandData,
+  petCategory: userBusinessType,
+  complianceRules: veterinaryCompliance
+});
+
+// 2. Content Generation
+const contentVariants = await generatePetContent({
+  prompt: systemPrompt + brandVoice + campaignContext,
+  variants: 3,
+  channel: 'instagram',
+  campaignType: 'vacinacao'
+});
+
+// 3. Compliance Check
+const validatedContent = await validateContent(contentVariants, {
+  blockedTerms: brandVoice.blockedTerms,
+  veterinaryCompliance: true,
+  brandGuidelines: brandVoice.guidelines
+});
+
+// 4. Human Approval (20%)
+const approvedContent = await requestHumanApproval(validatedContent);
+
+return approvedContent;
+```
+
+### Fluxo de Anamnese Digital Pet
+
+```typescript
+// 1. Website Analysis
+const websiteData = await analyzeWebsite(url, {
+  focus: 'pet_business',
+  elements: ['services', 'pricing', 'contact', 'about'],
+  competitors: await findPetCompetitors(location, businessType)
+});
+
+// 2. AI Analysis
+const insights = await analyzeWithAI({
+  content: websiteData,
+  prompt: petAnamnesePrompt,
+  businessType: 'pet_clinic' // ou pet_shop, banho_tosa, etc.
+});
+
+// 3. Recommendations Generation
+const recommendations = await generateRecommendations({
+  analysis: insights,
+  industry: 'pet',
+  quickWins: true,
+  longTerm: true
+});
+
+return { insights, recommendations, competitors };
+```
+
+### Fluxo de Jornada Automatizada
+
+```
+Trigger Event → AI Analysis → Template Selection → Content Generation → Human Review → Automation
+     │              │              │                   │                │            │
+  New Lead    → Analyze Lead → Choose Journey → Generate Emails → Approval → Send Sequence
+     │              │              │                   │                │            │
+Pet Service → Pet Category → Vaccination   → Pet-friendly   → Vet Review → WhatsApp
+   Needed       Analysis      Journey         Content         Required      Follow-up
 ```
 
 ---
@@ -847,6 +988,66 @@ export function CreateBrandManualButton() {
 
 ---
 
-**Última atualização:** 17 de agosto de 2025  
+### ADR-003: Integração com IA Generativa para Agência Pet
+**Decisão**: OpenAI GPT-4o como LLM principal para automação 80/20  
+**Status**: Aceito  
+**Data**: 2025-08-24  
+
+**Contexto**: Necessidade de automatizar 80% das operações de marketing pet mantendo qualidade e compliance veterinário.
+
+**Decisão**: Escolhemos OpenAI GPT-4o por:
+- Performance superior em geração de conteúdo
+- Capacidade de seguir prompts complexos
+- API estável e documentada
+- Suporte a function calling para integrações
+
+**Arquitetura de IA**:
+```typescript
+// System Prompt Structure
+interface PetMarketingPrompt {
+  brandVoice: BrandVoiceJSON;
+  petCompliance: VeterinaryGuidelines;
+  campaignContext: PetCampaignKit;
+  outputFormat: ContentVariant[];
+}
+```
+
+**Consequências**:
+- ✅ Automação inteligente de conteúdo pet
+- ✅ Compliance automático com regras veterinárias
+- ✅ Consistência de marca através de Brand Voice JSON
+- ❌ Dependência de provedor externo
+- ❌ Custos variáveis por token
+
+### ADR-004: Brand Voice JSON como Sistema de Identidade
+**Decisão**: Estruturar identidade de marca como JSON para IA  
+**Status**: Aceito  
+**Data**: 2025-08-24  
+
+**Contexto**: Necessidade de manter consistência de marca em conteúdo gerado por IA.
+
+**Decisão**: Brand Voice JSON contendo:
+```json
+{
+  "tone": "amigável, profissional, pet-friendly",
+  "persona": "veterinária experiente que ama animais",
+  "blockedTerms": ["barato", "promoção", "oferta"],
+  "approvedTerms": ["cuidado", "saúde", "bem-estar"],
+  "complianceRules": {
+    "veterinary": true,
+    "disclaimers": ["consulte sempre um veterinário"]
+  }
+}
+```
+
+**Consequências**:
+- ✅ Consistência automática de marca
+- ✅ Compliance integrado no sistema
+- ✅ Facilita onboarding de marcas
+- ❌ Complexidade inicial de configuração
+
+---
+
+**Última atualização:** 24 de agosto de 2025  
 **Versão:** 2.0  
 **Status:** ✅ Completo
