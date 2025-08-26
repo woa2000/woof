@@ -1,14 +1,26 @@
 {
-  "name": "out",
-  "version": "0.1.0",
+  "name": "woof-monorepo",
+  "version": "1.0.0",
+  "description": "Woof Marketing - Agência Pet Operada por IA",
   "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev": "npm --workspace server run dev",
+    "build": "npm run client:build && npm run server:build",
+    "client:build": "npm --workspace client run build",
+    "server:build": "npm --workspace server run build",
+    "start": "npm --workspace server run start",
+    "lint": "npm --workspace client run lint",
+    "type-check": "npm run client:type-check && npm run server:type-check",
+    "client:type-check": "npm --workspace client run type-check",
+    "server:type-check": "npm --workspace server run type-check",
+    "clean": "npm --workspace client run clean && npm --workspace server run clean",
     "check-auth": "node scripts/auth/check-auth.js",
-    "debug-storage": "node scripts/debug/debug-storage.js"
+    "debug-storage": "node scripts/debug/debug-storage.js",
+    "postinstall": "echo '✅ Woof Marketing workspaces installed'"
   },
   "dependencies": {
     "@supabase/ssr": "^0.6.1",

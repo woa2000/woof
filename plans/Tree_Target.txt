@@ -1,0 +1,139 @@
+woof-monorepo/ (raiz)
+├── package.json                    # Workspaces: ["client", "server"]
+├── .gitignore                      # Node_modules, .env, dist/, .next/
+├── README.md                       # Setup e uso do monorepo
+├── .env.example                    # Template vars consolidadas
+│
+├── client/                         # Frontend Next.js
+│   ├── package.json                # Next.js 15 + React 19 + UI deps
+│   ├── next.config.ts              # Config específico client
+│   ├── tsconfig.json               # TypeScript config (herda raiz)
+│   ├── tailwind.config.mjs         # TailwindCSS
+│   ├── middleware.ts               # Auth middleware (simplificado)
+│   ├── postcss.config.mjs
+│   ├── eslint.config.mjs
+│   │
+│   ├── src/
+│   │   ├── app/                    # App Router (SEM /api)
+│   │   │   ├── layout.tsx          # Root layout
+│   │   │   ├── page.tsx            # Landing page
+│   │   │   ├── globals.css         # Global styles
+│   │   │   │
+│   │   │   ├── (auth)/
+│   │   │   │   ├── login/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── cadastro/
+│   │   │   │       └── page.tsx
+│   │   │   │
+│   │   │   ├── (dashboard)/        # Protected routes
+│   │   │   │   ├── layout.tsx      # Dashboard layout
+│   │   │   │   ├── dashboard/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── anamnese-digital/
+│   │   │   │   ├── manual-marca/
+│   │   │   │   ├── campanhas/
+│   │   │   │   └── configuracoes/
+│   │   │   │
+│   │   │   └── auth/
+│   │   │       └── callback/
+│   │   │           └── route.ts    # Auth callback
+│   │   │
+│   │   ├── components/             # UI components
+│   │   │   ├── ui/                 # Base components
+│   │   │   ├── layout/             # Layout components  
+│   │   │   ├── auth/               # Auth components
+│   │   │   ├── brand-manual/       # Feature components
+│   │   │   └── anamnese/
+│   │   │
+│   │   ├── hooks/                  # Custom hooks
+│   │   ├── lib/                    # Utils client-side
+│   │   ├── services/               # API clients
+│   │   ├── types/                  # TypeScript types
+│   │   └── test/                   # Tests
+│   │
+│   ├── public/                     # Static assets
+│   │   ├── images/
+│   │   ├── icons/
+│   │   └── favicon.ico
+│   │
+│   └── .next/                      # Next.js build output
+│
+├── server/                         # Backend Express
+│   ├── package.json                # Express + Next + deps
+│   ├── tsconfig.json               # ES Modules + strict
+│   ├── .env.example                # Server-specific vars
+│   │
+│   ├── src/
+│   │   ├── index.ts                # Express + Next boot unificado
+│   │   │
+│   │   ├── routes/                 # Express routes
+│   │   │   ├── health.ts           # GET /api/health
+│   │   │   ├── calendario.ts       # Migrado de client/api/
+│   │   │   ├── anamnese.ts         # APIs da anamnese
+│   │   │   └── index.ts            # Router consolidado
+│   │   │
+│   │   ├── middleware/             # Express middlewares
+│   │   │   ├── auth.ts             # JWT/Supabase validation
+│   │   │   ├── cors.ts             # CORS config
+│   │   │   ├── compression.ts      # Response compression
+│   │   │   ├── logging.ts          # Request logging
+│   │   │   └── index.ts            # Middlewares consolidados
+│   │   │
+│   │   ├── services/               # Business logic
+│   │   │   ├── supabase.ts         # Supabase client
+│   │   │   ├── openai.ts           # OpenAI integration
+│   │   │   └── calendar.ts         # Calendar service
+│   │   │
+│   │   ├── utils/                  # Server utilities
+│   │   │   ├── logger.ts           # Structured logging
+│   │   │   ├── errors.ts           # Error handling
+│   │   │   └── validation.ts       # Input validation
+│   │   │
+│   │   └── types/                  # Server-side types
+│   │       ├── express.d.ts        # Express augmentation
+│   │       └── api.ts              # API types
+│   │
+│   └── dist/                       # TypeScript build output
+│       └── index.js
+│
+├── shared/ (futuro)                # Código compartilhado
+│   ├── types/                      # Types comuns
+│   └── utils/                      # Utilities comuns
+│
+├── docs/                           # Documentação existente
+│   ├── README.md
+│   ├── architecture/
+│   ├── development/
+│   └── deployment/
+│
+├── agents/                         # AI Agents existentes
+├── artifacts/                      # Artefatos existentes
+├── scripts/                        # Scripts utilitários
+└── sql/                           # Database scripts
+
+# Arquivos de configuração consolidados
+├── .gitignore                      # Git ignore global
+├── .nvmrc                          # Node version
+├── docker-compose.yml (futuro)     # Local development
+└── Dockerfile (futuro)             # Production deployment
+
+# Build outputs
+├── client/.next/                   # Next.js build
+├── server/dist/                    # TypeScript build
+└── node_modules/                   # Dependencies (workspace shared)
+
+ESTRUTURA DE DESENVOLVIMENTO:
+├── dev/ (modo desenvolvimento)
+│   ├── Server Express (porta 3000)
+│   │   ├── Next.js embedded (client/)
+│   │   ├── APIs (/api/*)
+│   │   └── Static files proxy
+│   └── Client standalone (porta 3001, opcional)
+│       └── Para desenvolvimento isolado frontend
+
+ESTRUTURA DE PRODUÇÃO:
+├── Server Express (porta 3000)
+│   ├── Next.js production build
+│   ├── Express APIs (/api/*)
+│   └── Static files serving
+└── No client separado

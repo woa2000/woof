@@ -1,0 +1,222 @@
+[
+  {
+    "id": "setup-001",
+    "title": "Criar estrutura de workspaces",
+    "description": "Configurar npm workspaces com client/ e server/, mover src/app para client/src/app removendo /api",
+    "responsible": "Tech_Lead",
+    "dependencies": [],
+    "status": "todo",
+    "estimatedHours": 4,
+    "priority": "high",
+    "phase": "setup-monorepo"
+  },
+  {
+    "id": "setup-002", 
+    "title": "Configurar client/package.json",
+    "description": "Criar package.json do client com Next.js 15, React 19, TailwindCSS e deps UI, mover configs",
+    "responsible": "Frontend_Developer", 
+    "dependencies": ["setup-001"],
+    "status": "todo",
+    "estimatedHours": 2,
+    "priority": "high",
+    "phase": "setup-monorepo"
+  },
+  {
+    "id": "setup-003",
+    "title": "Mover assets e componentes",
+    "description": "Migrar components/, hooks/, lib/, services/, types/ para client/src/, ajustar imports @/*",
+    "responsible": "Frontend_Developer",
+    "dependencies": ["setup-002"],
+    "status": "todo", 
+    "estimatedHours": 3,
+    "priority": "medium",
+    "phase": "setup-monorepo"
+  },
+  {
+    "id": "setup-004",
+    "title": "Scripts package.json raiz",
+    "description": "Configurar workspaces e scripts unificados: dev, build, start usando npm --workspace",
+    "responsible": "Tech_Lead",
+    "dependencies": ["setup-001"],
+    "status": "todo",
+    "estimatedHours": 2, 
+    "priority": "high",
+    "phase": "setup-monorepo"
+  },
+  {
+    "id": "server-001",
+    "title": "Estrutura básica server/",
+    "description": "Criar server/src/ com estrutura: index.ts, routes/, middleware/, services/, utils/",
+    "responsible": "Backend_Developer",
+    "dependencies": ["setup-001"],
+    "status": "todo",
+    "estimatedHours": 3,
+    "priority": "high", 
+    "phase": "setup-express"
+  },
+  {
+    "id": "server-002", 
+    "title": "Boot unificado Express+Next",
+    "description": "Implementar server/src/index.ts com await app.prepare() e server.all('*', handle)",
+    "responsible": "Tech_Lead",
+    "dependencies": ["server-001"],
+    "status": "todo",
+    "estimatedHours": 6,
+    "priority": "critical",
+    "phase": "setup-express"
+  },
+  {
+    "id": "server-003",
+    "title": "Configurações TypeScript server",
+    "description": "Criar server/tsconfig.json com ES Modules, server/package.json com Express + deps",
+    "responsible": "Backend_Developer", 
+    "dependencies": ["server-001"],
+    "status": "todo",
+    "estimatedHours": 2,
+    "priority": "high",
+    "phase": "setup-express"
+  },
+  {
+    "id": "server-004",
+    "title": "Healthcheck básico",
+    "description": "Implementar GET /api/health com status, env, uptime, middlewares CORS e compression",
+    "responsible": "Backend_Developer",
+    "dependencies": ["server-002"],
+    "status": "todo", 
+    "estimatedHours": 2,
+    "priority": "medium",
+    "phase": "setup-express"
+  },
+  {
+    "id": "api-001",
+    "title": "Migrar API calendário",
+    "description": "Mover src/app/api/calendario → server/src/routes/calendario, adaptar para Express Router",
+    "responsible": "Backend_Developer",
+    "dependencies": ["server-002"],
+    "status": "todo",
+    "estimatedHours": 4,
+    "priority": "high",
+    "phase": "api-migration"
+  },
+  {
+    "id": "api-002",
+    "title": "Auth middleware Express",
+    "description": "Criar middleware de autenticação Express com Supabase JWT, proteger rotas API",
+    "responsible": "Backend_Developer", 
+    "dependencies": ["server-002"],
+    "status": "todo",
+    "estimatedHours": 6,
+    "priority": "critical",
+    "phase": "api-migration"
+  },
+  {
+    "id": "api-003",
+    "title": "Testes APIs migradas",
+    "description": "Testar funcionalidade equivalente das APIs migradas, validar autenticação",
+    "responsible": "QA_Engineer",
+    "dependencies": ["api-001", "api-002"],
+    "status": "todo",
+    "estimatedHours": 4,
+    "priority": "high", 
+    "phase": "api-migration"
+  },
+  {
+    "id": "integration-001",
+    "title": "Scripts unificados",
+    "description": "Configurar npm run dev, build, start funcionando end-to-end com workspaces",
+    "responsible": "DevOps_Specialist",
+    "dependencies": ["server-002", "setup-004"],
+    "status": "todo", 
+    "estimatedHours": 3,
+    "priority": "high",
+    "phase": "integration-tests"
+  },
+  {
+    "id": "integration-002",
+    "title": "Testes end-to-end",
+    "description": "Validar sistema completo: auth, APIs, frontend, middleware Next.js funcionando",
+    "responsible": "QA_Engineer",
+    "dependencies": ["integration-001", "api-003"],
+    "status": "todo",
+    "estimatedHours": 8,
+    "priority": "critical",
+    "phase": "integration-tests"
+  },
+  {
+    "id": "integration-003",
+    "title": "Validação de performance", 
+    "description": "Benchmark antes/depois: LCP < 2.5s, APIs < 500ms, verificar não degradação",
+    "responsible": "Tech_Lead",
+    "dependencies": ["integration-002"],
+    "status": "todo",
+    "estimatedHours": 4,
+    "priority": "medium",
+    "phase": "integration-tests"
+  },
+  {
+    "id": "improvement-001",
+    "title": "Observabilidade",
+    "description": "Logs estruturados JSON, métricas request time, error tracking, health checks completos",
+    "responsible": "DevOps_Specialist", 
+    "dependencies": ["integration-002"],
+    "status": "todo",
+    "estimatedHours": 6,
+    "priority": "medium",
+    "phase": "improvements"
+  },
+  {
+    "id": "improvement-002",
+    "title": "Security headers",
+    "description": "Rate limiting básico, security headers, environment validation, graceful shutdown",
+    "responsible": "Backend_Developer",
+    "dependencies": ["integration-002"],
+    "status": "todo",
+    "estimatedHours": 4,
+    "priority": "medium", 
+    "phase": "improvements"
+  },
+  {
+    "id": "middleware-001",
+    "title": "Simplificar client/middleware.ts",
+    "description": "Remover handling de API routes do middleware Next.js, manter apenas auth redirects",
+    "responsible": "Frontend_Developer",
+    "dependencies": ["api-001"],
+    "status": "todo",
+    "estimatedHours": 2,
+    "priority": "medium",
+    "phase": "api-migration"
+  },
+  {
+    "id": "env-001", 
+    "title": "Consolidar environment variables",
+    "description": "Criar .env.example consolidado com PORT, CORS_ORIGIN, manter vars Supabase/OpenAI",
+    "responsible": "DevOps_Specialist",
+    "dependencies": ["server-001"],
+    "status": "todo",
+    "estimatedHours": 1,
+    "priority": "low",
+    "phase": "setup-express"
+  },
+  {
+    "id": "docs-001",
+    "title": "Atualizar documentação",
+    "description": "Atualizar README.md, DEVELOPMENT_GUIDE.md com instruções novo setup monorepo",
+    "responsible": "Tech_Lead", 
+    "dependencies": ["integration-002"],
+    "status": "todo",
+    "estimatedHours": 3,
+    "priority": "low",
+    "phase": "improvements"
+  },
+  {
+    "id": "validation-001",
+    "title": "Smoke tests automatizados",
+    "description": "Script smoke-test.sh para validar health, landing page, auth redirect, APIs básicas",
+    "responsible": "QA_Engineer",
+    "dependencies": ["integration-001"],
+    "status": "todo",
+    "estimatedHours": 2,
+    "priority": "medium",
+    "phase": "integration-tests"
+  }
+]

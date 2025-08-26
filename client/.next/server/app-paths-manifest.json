@@ -1,7 +1,10 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 {}
 =======
+=======
+>>>>>>> run/fundamentos-marketing-insights
 =======
 >>>>>>> run/fundamentos-marketing-insights
 {
@@ -11,6 +14,10 @@
   "/(dashboard)/manual-marca/page": "app/(dashboard)/manual-marca/page.js",
   "/(dashboard)/manual-marca/[id]/page": "app/(dashboard)/manual-marca/[id]/page.js"
 <<<<<<< HEAD
+<<<<<<< HEAD
+}
+>>>>>>> run/fundamentos-marketing-insights
+=======
 }
 >>>>>>> run/fundamentos-marketing-insights
 =======
