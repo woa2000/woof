@@ -4,7 +4,6 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "outDir": "dist",
-    "rootDir": "src",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -27,11 +26,16 @@
     "allowImportingTsExtensions": false,
     "noEmit": false,
     "incremental": true,
-    "tsBuildInfoFile": ".tsbuildinfo"
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "paths": {
+      "@woof/shared": ["../shared/src/index"],
+      "@woof/shared/*": ["../shared/src/*"]
+    }
   },
   "include": [
     "src/**/*.ts",
-    "src/**/*.js"
+    "src/**/*.js",
+    "../shared/src/**/*.ts"
   ],
   "exclude": [
     "node_modules",

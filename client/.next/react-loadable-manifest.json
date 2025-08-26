@@ -14,9 +14,5 @@
   "../../node_modules/@supabase/storage-js/dist/module/lib/helpers.js -> @supabase/node-fetch": {
     "id": "../../node_modules/@supabase/storage-js/dist/module/lib/helpers.js -> @supabase/node-fetch",
     "files": []
-  },
-  "hooks/features/useAnamneseDigital.ts -> @/lib/mocks/anamnese": {
-    "id": "hooks/features/useAnamneseDigital.ts -> @/lib/mocks/anamnese",
-    "files": []
   }
 }

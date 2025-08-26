@@ -1,5 +1,3 @@
 {
-  "/(dashboard)/anamnese-digital/page": "app/(dashboard)/anamnese-digital/page.js",
-  "/(dashboard)/manual-marca/page": "app/(dashboard)/manual-marca/page.js",
   "/(dashboard)/dashboard/page": "app/(dashboard)/dashboard/page.js"
 }
