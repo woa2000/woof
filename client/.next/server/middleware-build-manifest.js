@@ -2,17 +2,7 @@ globalThis.__BUILD_MANIFEST = {
   "polyfillFiles": [
     "static/chunks/polyfills.js"
   ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "devFiles": [
-    "static/chunks/react-refresh.js"
-  ],
-=======
   "devFiles": [],
->>>>>>> run/fundamentos-marketing-insights
-=======
-  "devFiles": [],
->>>>>>> run/fundamentos-marketing-insights
   "ampDevFiles": [],
   "lowPriorityFiles": [],
   "rootMainFiles": [
@@ -21,24 +11,7 @@ globalThis.__BUILD_MANIFEST = {
   ],
   "rootMainFilesTree": {},
   "pages": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "/_app": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/_app.js"
-    ],
-    "/_error": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/_error.js"
-    ]
-=======
     "/_app": []
->>>>>>> run/fundamentos-marketing-insights
-=======
-    "/_app": []
->>>>>>> run/fundamentos-marketing-insights
   },
   "ampFirstPages": []
 };

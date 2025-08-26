@@ -1,13 +1,4 @@
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "pages": {}
-=======
-=======
->>>>>>> run/fundamentos-marketing-insights
-=======
->>>>>>> run/fundamentos-marketing-insights
   "pages": {
     "/layout": [
       "static/chunks/webpack.js",
@@ -20,57 +11,20 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/layout.js"
     ],
-    "/(dashboard)/dashboard/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/dashboard/page.js"
-    ],
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
-    ],
-    "/login/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/login/page.js"
-    ],
-    "/(dashboard)/anamnese-digital/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/anamnese-digital/page.js"
-    ],
     "/(dashboard)/manual-marca/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/manual-marca/page.js"
     ],
-    "/(dashboard)/manual-marca/[id]/page": [
+    "/(dashboard)/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/manual-marca/[id]/page.js"
+      "static/chunks/app/(dashboard)/dashboard/page.js"
     ],
-    "/(dashboard)/landing-pages/page": [
+    "/(dashboard)/anamnese-digital/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/landing-pages/page.js"
-    ],
-    "/(dashboard)/campanhas/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/campanhas/page.js"
-    ],
-    "/(dashboard)/leads/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/leads/page.js"
+      "static/chunks/app/(dashboard)/anamnese-digital/page.js"
     ]
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> run/fundamentos-marketing-insights
-=======
->>>>>>> run/fundamentos-marketing-insights
-=======
->>>>>>> run/fundamentos-marketing-insights
 }

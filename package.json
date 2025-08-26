@@ -8,7 +8,10 @@
     "server"
   ],
   "scripts": {
-    "dev": "npm --workspace server run dev",
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\" --names \"SERVER,CLIENT\" --prefix-colors \"cyan,magenta\"",
+    "dev:both": "concurrently \"npm run server:dev\" \"npm run client:dev\" --names \"SERVER,CLIENT\" --prefix-colors \"cyan,magenta\"",
+    "server:dev": "npm --workspace server run dev",
+    "client:dev": "npm --workspace client run dev",
     "build": "npm run client:build && npm run server:build",
     "client:build": "npm --workspace client run build",
     "server:build": "npm --workspace server run build",
@@ -39,6 +42,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
     "eslint": "^9",
     "eslint-config-next": "15.4.2",
     "tailwindcss": "^4",
